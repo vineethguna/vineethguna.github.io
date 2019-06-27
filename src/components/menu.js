@@ -56,13 +56,6 @@ const NavListItem = styled.li`
     font-size: ${fontSizes.medium};
   `};
   ${media.tiny`font-size: ${fontSizes.smallish};`};
-  &:before {
-    display: block;
-    content: "0" counter(item) ".";
-    color: ${colors.green};
-    font-size: ${fontSizes.small};
-    margin-bottom: 5px;
-  }
 `
 const NavLink = styled(AnchorLink)`
   ${mixins.link};
