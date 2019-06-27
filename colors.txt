@@ -1,0 +1,7 @@
+background-color: #23083f
+
+Menu items color - #ffefb2
+f0ff54
+1cffa0
+
+e0e340
