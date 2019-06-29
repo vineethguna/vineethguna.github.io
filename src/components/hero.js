@@ -5,18 +5,28 @@ import { email } from "@config"
 import styled from "styled-components"
 import { theme, mixins, media, Section } from "@styles"
 import { IconLocation } from "@components/icons"
+import MyPic from '@images/me.png'
 const { colors, fontSizes, fonts } = theme
 
 const HeroContainer = styled(Section)`
-  ${mixins.flexCenter};
-  flex-direction: column;
+  ${mixins.flexBetween};
+  position: relative;
   align-items: flex-start;
+  padding-top: 250px;
   min-height: 100vh;
-  ${media.tablet`padding-top: 150px;`};
   div {
     width: 100%;
   }
+  ${media.tablet`padding-top: 150px;`};
+  ${media.tablet`display: block;`};
 `
+
+const TextContainer = styled.div`
+  width: 60%;
+  max-width: 500px;
+  ${media.tablet`width: 100%;`};
+`;
+
 const Hi = styled.h1`
   color: ${colors.green};
   margin: 0 0 20px 3px;
@@ -53,6 +63,7 @@ const Blurb = styled.div`
   }
 `
 const Location = styled.div`
+  display: inline
   margin-top: 10px;
   color: ${colors.green};
   svg {
@@ -64,6 +75,18 @@ const EmailLink = styled.a`
   ${mixins.bigButton};
   margin-top: 50px;
 `
+
+const PicContainer = styled.div`
+  width: 40%;
+  max-width: 300px;
+  margin-left: 60px;
+  ${media.tablet`margin: 60px auto 0;`};
+  ${media.phablet`width: 70%;`};
+`
+
+const Avatar = styled.img`
+  border-radius: 50%;
+`;
 
 const Hero = ({ data }) => {
   const [isMounted, setIsMounted] = useState(false)
@@ -107,14 +130,21 @@ const Hero = ({ data }) => {
 
   return (
     <HeroContainer>
-      <TransitionGroup>
-        {isMounted &&
-          items.map((item, i) => (
-            <CSSTransition key={i} classNames="fadeup" timeout={3000}>
-              {item}
-            </CSSTransition>
-          ))}
-      </TransitionGroup>
+      <TextContainer>
+        <TransitionGroup>
+          {isMounted &&
+            items.map((item, i) => (
+              <CSSTransition key={i} classNames="fadeup" timeout={3000}>
+                {item}
+              </CSSTransition>
+            ))}
+        </TransitionGroup>
+      </TextContainer>
+      <CSSTransition in={isMounted} classNames="fadeup" timeout={3000}>
+        <PicContainer style={{ transitionDelay: "800ms" }} className="fadeup-enter">
+          <Avatar src={MyPic} />
+        </PicContainer>
+      </CSSTransition>
     </HeroContainer>
   )
 }
